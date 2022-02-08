@@ -1,0 +1,4 @@
+torch.min(rmse) = tensor(0.)
+torch.max(rmse) = tensor(0.0001)
+torch.mean(rmse) = tensor(6.2241e-06)
+torch.std(rmse) = tensor(1.1971e-05)
