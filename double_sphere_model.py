@@ -3,11 +3,26 @@ import torch
 class DoubleSphereCamera:
 
     def __init__(self, parameters):
+        """Initializes a double sphere camera model instance.
 
-         self.chi, self.alpha, self.fx, self.fy, self.cx, self.cy = parameters
+        Args:
+            parameters : List of parameters ordered as follows -
+                chi, alpha, fx, fy, cx, cy
+        """
+
+        self.chi, self.alpha, self.fx, self.fy, self.cx, self.cy = parameters
 
 
     def project_3d_to_2d(self, points):
+        """Projects a tensor of 3d points to their 2d counterparts on the image
+        plane.
+
+        Args:
+            points : A (N, 3) tensor containing all the 3d points.
+
+        Returns:
+            2d points.
+        """
 
         assert len(points.shape) == 2
         assert points.shape[1] == 3
@@ -25,6 +40,15 @@ class DoubleSphereCamera:
         return torch.hstack((u.reshape(-1, 1), v.reshape(-1, 1)))
 
     def project_2d_to_3d(self, points):
+        """Unprojects a tensor of pixel locations (2d points) to the 3d camera
+        coordinate system for an arbitrary z.
+
+        Args:
+            points : A (N, 2) tensor containing the pixel locations / 2d points.
+
+        Returns:
+            3d points.
+        """
 
         assert len(points.shape) == 2
         assert points.shape[1] == 2
